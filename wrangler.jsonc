@@ -1,0 +1,21 @@
+{
+  // Custom chocolates shop: website, shop, bespoke orders and private admin.
+  // No secrets in this file. Card payments and email alerts are switched on with Cloudflare secrets (see README).
+  "name": "custom-chocolates",
+  "main": "src/worker.js",
+  "compatibility_date": "2025-09-01",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "not_found_handling": "none",
+    "html_handling": "auto-trailing-slash"
+  },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "custom-chocolates", "database_id": "e5a80a3e-725c-4e9a-8ca4-2b879a9910de" }
+  ],
+  // once a day: delete old enquiries, unfinished checkouts, expired sessions and unused photos (privacy notice)
+  "triggers": { "crons": ["41 3 * * *"] },
+  "observability": { "enabled": true }
+}
